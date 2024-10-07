@@ -12,9 +12,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -52,34 +57,31 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
-      <header className="px-4 lg:px-6 h-24 flex items-center justify-between border-b border-gray-700">
-        <Link className="flex items-center justify-center" href="#">
-          <Image
-            src="/images/logo.png"
-            alt="Switch Dimension Logo"
-            width={100}  // Adjusted to maintain aspect ratio
-            height={100} // Increased to 100 as requested
-            priority
-          />
-        </Link>
-        <nav className="hidden md:flex gap-4 sm:gap-6">
-          <NavItems />
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" className={`p-0 md:hidden hover:bg-yellow-500 group ${roundedButtonClass}`} size="icon">
-              <Menu className="h-5 w-5 group-hover:text-black" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-black">
-            <nav className="flex flex-col gap-4">
-              <NavItems />
-            </nav>
-          </SheetContent>
-        </Sheet>
+      <header className="px-4 lg:px-6 h-14 flex items-center justify-center border-b border-gray-700">
+        <div className="container max-w-6xl flex items-center justify-between">
+          <Link className="flex items-center justify-center" href="#">
+            <Zap className="h-5 w-5 text-yellow-500" />
+            <span className="ml-2 text-lg font-bold text-white">Switch<span className="font-light">Dimension</span></span>
+          </Link>
+          <nav className="hidden md:flex gap-4 sm:gap-6">
+            <NavItems />
+          </nav>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className={`p-0 md:hidden hover:bg-yellow-500 group ${roundedButtonClass}`} size="icon">
+                <Menu className="h-5 w-5 group-hover:text-black" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-black">
+              <nav className="flex flex-col gap-4">
+                <NavItems />
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </header>
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col items-center">
         <section className="w-full py-16 md:py-32 lg:py-42 xl:py-62 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-yellow-500/10 to-black animate-breath"></div>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent">
@@ -89,8 +91,8 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-6xl h-full flex items-center">
-            <div className="flex flex-col items-center space-y-4 text-center w-full">
+          <div className="container max-w-6xl px-4 md:px-6 relative z-10">
+            <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className={`text-3xl ${thinnerFontClass} tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none hero-title`}>
                   Learn, Build, Grow with AI
@@ -109,9 +111,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div className="h-px bg-gradient-to-r from-yellow-500 to-black"></div>
+        <div className="w-full h-px bg-gradient-to-r from-yellow-500 to-black"></div>
         <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-black">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container max-w-6xl px-4 md:px-6">
             <h2 className={`text-2xl ${thinnerFontClass} tracking-tighter sm:text-3xl md:text-4xl text-center mb-12 ${gradientTextClass}`}>Our AI Solutions</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="bg-neutral-900 border border-gray-700">
@@ -151,7 +153,7 @@ export default function Home() {
           </div>
         </section>
         <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-neutral-900">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container max-w-6xl px-4 md:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
                 <h2 className={`text-2xl ${thinnerFontClass} tracking-tighter sm:text-3xl md:text-4xl ${gradientTextClass}`}>About Us</h2>
@@ -164,8 +166,8 @@ export default function Home() {
               </div>
               <div className="relative h-[300px] md:h-[400px] bg-neutral-800 rounded-lg overflow-hidden">
                 <Image
-                  src="/images/about.jpg"
-                  alt="About Switch Dimension photo by Mati Mango Pexels"
+                  src="/placeholder.svg"
+                  alt="About Switch Dimension"
                   layout="fill"
                   objectFit="cover"
                   className="rounded-lg"
@@ -175,7 +177,7 @@ export default function Home() {
           </div>
         </section>
         <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32 bg-black">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container max-w-6xl px-4 md:px-6">
             <h2 className={`text-2xl ${thinnerFontClass} tracking-tighter sm:text-3xl md:text-4xl text-center mb-12 ${gradientTextClass}`}>What Our Clients Say</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -207,7 +209,7 @@ export default function Home() {
           </div>
         </section>
         <section id="faq" className="w-full py-12 md:py-24 lg:py-32 bg-neutral-900">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container max-w-6xl px-4 md:px-6">
             <h2 className={`text-2xl ${thinnerFontClass} tracking-tighter sm:text-3xl md:text-4xl text-center mb-12 ${gradientTextClass}`}>Frequently Asked Questions</h2>
             <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
               {[
@@ -237,7 +239,7 @@ export default function Home() {
           </div>
         </section>
         <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-black">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+          <div className="container max-w-6xl px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className={`text-2xl ${thinnerFontClass} tracking-tighter sm:text-3xl md:text-4xl ${gradientTextClass}`}>
@@ -281,7 +283,7 @@ export default function Home() {
         </section>
       </main>
       <footer className="py-6 w-full shrink-0 px-4 md:px-6 border-t border-gray-700">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 max-w-6xl">
+        <div className="container max-w-6xl flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-400">© 2024 Switch Dimension. All rights reserved.</p>
           <nav className="flex gap-4">
             <Link className="text-xs hover:underline underline-offset-4 text-gray-400" href="#">
