@@ -55,10 +55,10 @@ export default function Home() {
       <header className="px-4 lg:px-6 h-24 flex items-center justify-between border-b border-gray-700">
         <Link className="flex items-center justify-center" href="#">
           <Image
-            src="/images/logo.png"
+            src="/images/sdlogo.svg"
             alt="Switch Dimension Logo"
-            width={100}  // Adjusted to maintain aspect ratio
-            height={100} // Increased to 100 as requested
+            width={100}
+            height={100}
             priority
           />
         </Link>
@@ -83,16 +83,12 @@ export default function Home() {
         <section className="w-full py-16 md:py-32 lg:py-42 xl:py-62 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-yellow-500/10 to-black animate-breath"></div>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent">
-            <div className="w-full h-full grid grid-cols-[repeat(auto-fill,minmax(20px,1fr))] grid-rows-[repeat(auto-fill,minmax(20px,1fr))]">
-              {[...Array(1000)].map((_, i) => (
-                <div key={i} className="border-t border-l border-white/10" />
-              ))}
-            </div>
+            <div className="w-full h-full grid-background"></div>
           </div>
           <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-6xl h-full flex items-center">
             <div className="flex flex-col items-center space-y-4 text-center w-full">
               <div className="space-y-2">
-                <h1 className={`text-3xl ${thinnerFontClass} tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none hero-title`}>
+                <h1 className={`text-3xl ${thinnerFontClass} tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-white`}>
                   Learn, Build, Grow with AI
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-300 md:text-lg">
@@ -321,6 +317,13 @@ export default function Home() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
           color: transparent;
+        }
+      `}</style>
+      <style jsx>{`
+        .grid-background {
+          background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+          background-size: 20px 20px;
         }
       `}</style>
     </div>
